@@ -32,4 +32,16 @@ public class UserService {
     public ArrayList<User> getUsers() {
         return users;
     }
+
+    public User findOrCreate(String username) {
+        Optional<User> user =  this.getUserByUsername(username);
+        return  user.isPresent() ? user.get() : this.createNewUser(username);
+    }
+
+    public User createNewUser(String username){
+
+        User newUser = new User(users.size()+1, username);
+        users.add(newUser);
+        return newUser;
+    }
 }
