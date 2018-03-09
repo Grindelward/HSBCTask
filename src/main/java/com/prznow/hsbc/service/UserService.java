@@ -1,14 +1,17 @@
 package com.prznow.hsbc.service;
 
+import com.prznow.hsbc.model.Follower;
 import com.prznow.hsbc.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private ArrayList<User> users = new ArrayList<>();
+    private HashSet<Follower> followers = new HashSet<>();
 
     public UserService() {
         User texugo = new User(1, "Texugo");
@@ -38,10 +41,23 @@ public class UserService {
         return  user.isPresent() ? user.get() : this.createNewUser(username);
     }
 
-    public User createNewUser(String username){
-
+    private User createNewUser(String username){
         User newUser = new User(users.size()+1, username);
         users.add(newUser);
         return newUser;
     }
+
+    public void followUser(User user, User followed){
+        Follower follower = new Follower(user, followed);
+
+        if(!(user == null || followed == null) && !followers.contains(follower)) {
+
+            followers.add(new Follower(user, followed));
+        }
+    }
+
+    public HashSet<Follower> getFollowers() {
+        return followers;
+    }
 }
+//http://localhost:8080/users/Texugo/follow/TestUser
