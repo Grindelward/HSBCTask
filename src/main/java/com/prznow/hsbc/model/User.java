@@ -1,8 +1,8 @@
 package com.prznow.hsbc.model;
 
 public class User {
-    Integer id;
-    String username;
+    private Integer id;
+    private String username;
 
     public User(Integer id, String username) {
         this.id = id;
