@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/messages")
@@ -22,15 +21,15 @@ public class MessageController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public LinkedList<Message> getAll(){
+    @RequestMapping("")
+    public LinkedList<Message> getAll() {
         return messageService.getMessages();
     }
 
     @RequestMapping(value = "/{username}/add", method = RequestMethod.POST)
     public String addMessage(@PathVariable String username, @RequestBody String message) throws TooLongMessageException {
         messageService.addMessage(username, message);
-        return "Message adding successful";
+        return "Message added successful";
     }
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
@@ -40,7 +39,7 @@ public class MessageController {
 
     @RequestMapping(value = "/{username}/timeline", method = RequestMethod.GET)
     public List<Message> getFollowedMessages(@PathVariable String username) throws CannotFindUserException {
-            return messageService.getFollowedMessages(userService.getUserByUsername(username));
+        return messageService.getFollowedMessages(userService.getUserByUsername(username));
     }
 
 }

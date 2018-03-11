@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -17,8 +16,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public ArrayList<User> getAll(){
+    @RequestMapping("")
+    public ArrayList<User> getAll() {
         return userService.getUsers();
     }
 
@@ -32,15 +31,15 @@ public class UserController {
         return userService.getUserByUsername(username);
     }
 
-    @RequestMapping(value = "/{user}/follow/{followed}", method = RequestMethod.GET)
-    public String followUser(@PathVariable String user, @PathVariable String followed) throws CannotFindUserException {
-        userService.followUser(userService.getUserByUsername(user),userService.getUserByUsername(followed) );
-        return "User:" + user + " start to follow: " + followed;
+    @RequestMapping(value = "/{username}/follow/{followed}", method = RequestMethod.GET)
+    public String followUser(@PathVariable String username, @PathVariable String followed) throws CannotFindUserException {
+        userService.followUser(userService.getUserByUsername(username), userService.getUserByUsername(followed));
+        return "User " + username + " starts to follow " + followed;
     }
 
-    @RequestMapping("/{user}/followed")
-    public HashSet<User> getAllFollowed(@PathVariable String user) throws CannotFindUserException {
-        return userService.getFollowed(userService.getUserByUsername(user));
+    @RequestMapping("/{username}/followed")
+    public HashSet<User> getAllFollowed(@PathVariable String username) throws CannotFindUserException {
+        return userService.getFollowed(userService.getUserByUsername(username));
     }
 
 

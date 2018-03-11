@@ -37,7 +37,7 @@ public class User {
         this.followed = followed;
     }
 
-    public void addFollowed(User user){
+    public void addFollowed(User user) {
         this.followed.add(user);
     }
 }

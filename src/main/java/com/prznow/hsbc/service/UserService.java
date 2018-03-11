@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -48,7 +47,7 @@ public class UserService {
     public User findOrCreate(String username) {
         try {
             return this.getUserByUsername(username);
-        } catch (CannotFindUserException ex){
+        } catch (CannotFindUserException ex) {
             return this.createNewUser(username);
         }
 
@@ -68,6 +67,4 @@ public class UserService {
         return user.getFollowed();
     }
 
-
 }
-//http://localhost:8080/users/Texugo/follow/TestUser
