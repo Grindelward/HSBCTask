@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class MessageService {
+    private static final Integer MESSAGE_LENGTH = 140;
     private LinkedList<Message> messages = new LinkedList<>();
 
     @Autowired
     private UserService userService;
 
     public void addMessage(String username, String message) throws TooLongMessageException {
-        if (message.length() > 140) {
+        if (message.length() > MESSAGE_LENGTH) {
             throw new TooLongMessageException();
         }
         messages.add(new Message(userService.findOrCreate(username), message));

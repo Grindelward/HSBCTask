@@ -21,7 +21,7 @@
             
 ####
 
-    Start od followed users    
+    List of followed users    
     Mapping: "/users/{username}/followed",
     Method: GET,
     Params: {username}(String) name of your user
