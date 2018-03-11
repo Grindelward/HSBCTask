@@ -1,10 +1,15 @@
 package com.prznow.hsbc.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class Message implements Comparable{
     private User author;
     private LocalDateTime timestamp;
+
+    @NotEmpty
+    @Size(max=140)
     private String message;
 
     public Message(User author, String message) {
